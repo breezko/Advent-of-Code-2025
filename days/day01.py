@@ -63,9 +63,63 @@ Because the dial points at 0 a total of three times during this process, the pas
 
 Analyze the rotations in your attached document. What's the actual password to open the door?
 """
-def solve():
-    data = read_input(INPUT_FILE)
-    print("Day 1, Part 1:", rotate(data))
+def solve_part1():
+    print("Day 1, Part 1:", rotate(read_input(INPUT_FILE)))
+
+
+"""
+--- Part Two ---
+You're sure that's the right password, but the door won't open. You knock, but nobody answers. You build a snowman while you think.
+
+As you're rolling the snowballs for your snowman, you find another security document that must have fallen into the snow:
+
+"Due to newer security protocols, please use password method 0x434C49434B until further notice."
+
+You remember from the training seminar that "method 0x434C49434B" means you're actually supposed to count the number of times any click causes the dial to point at 0, regardless of whether it happens during a rotation or at the end of one.
+
+Following the same rotations as in the above example, the dial points at zero a few extra times during its rotations:
+
+The dial starts by pointing at 50.
+The dial is rotated L68 to point at 82; during this rotation, it points at 0 once.
+The dial is rotated L30 to point at 52.
+The dial is rotated R48 to point at 0.
+The dial is rotated L5 to point at 95.
+The dial is rotated R60 to point at 55; during this rotation, it points at 0 once.
+The dial is rotated L55 to point at 0.
+The dial is rotated L1 to point at 99.
+The dial is rotated L99 to point at 0.
+The dial is rotated R14 to point at 14.
+The dial is rotated L82 to point at 32; during this rotation, it points at 0 once.
+In this example, the dial points at 0 three times at the end of a rotation, plus three more times during a rotation. So, in this example, the new password would be 6.
+
+Be careful: if the dial were pointing at 50, a single rotation like R1000 would cause the dial to point at 0 ten times before returning back to 50!
+
+Using password method 0x434C49434B, what is the password to open the door?
+"""
+def solve_part2():
+    print("Day 1, Part 2:", rotate_with_count(read_input(INPUT_FILE)))
+
+def rotate_with_count(input: str) -> int:
+    position = 50
+    zero_count = 0
+
+    for line in input.splitlines():
+        direction = line[0]
+        distance = int(line[1:])
+
+        if direction == "L":
+            for _ in range(distance):
+                position = (position - 1) % 100
+                if position == 0:
+                    zero_count += 1
+        elif direction == "R":
+            for _ in range(distance):
+                position = (position + 1) % 100
+                if position == 0:
+                    zero_count += 1
+
+    return zero_count
+
 
 
 def rotate(input: str) -> int:
@@ -86,5 +140,8 @@ def rotate(input: str) -> int:
 
     return zero_count
 
+
+
 if __name__ == "__main__":
-    solve()
+    solve_part1()
+    solve_part2()
