@@ -1,6 +1,6 @@
 # Advent of Code 2025
-
-[https://adventofcode.com/2025](https://adventofcode.com/2025)
+Advent Of Code is an annual programming event.
+Daily challenges published in December 2025 can be found on https://adventofcode.com/2025
 
 ## ⚠️ Spoiler Alert
 
