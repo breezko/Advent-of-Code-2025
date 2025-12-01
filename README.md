@@ -10,6 +10,12 @@ Daily challenges published in December 2025 can be found on https://adventofcode
 
 ## Running Solutions
 
+To run all days:
+
+```
+python -m main
+```
+
 To run a specific day:
 
 ```bash
