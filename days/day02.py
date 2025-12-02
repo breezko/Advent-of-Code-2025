@@ -74,7 +74,7 @@ def solve_part2():
     id_ranges = tokenize_ranges(data)
     print("Day 2, Part 2:",sum_multiple_repeated_ids(id_ranges))
 
-def sum_multiple_repeated_ids(id_ranges) -> list:
+def sum_multiple_repeated_ids(id_ranges: list[tuple]) -> int:
     invalid_ids = []
     for start, end in id_ranges:
         for id_num in range(int(start), int(end) + 1):
@@ -89,7 +89,7 @@ def sum_multiple_repeated_ids(id_ranges) -> list:
     return sum(invalid_ids)
 
 
-def sum_repeated_ids(id_ranges) -> list:
+def sum_repeated_ids(id_ranges: list[tuple]) -> int:
     invalid_ids = []
     for start, end in id_ranges:
         for id_num in range(int(start), int(end) + 1):
