@@ -1,4 +1,5 @@
 from pathlib import Path
+from utils.aoc import aoc_part
 from utils.io import read_input
 
 INPUT_FILE = Path(__file__).parents[1] / "inputs" / "raw" / "day01.txt"
@@ -63,8 +64,9 @@ Because the dial points at 0 a total of three times during this process, the pas
 
 Analyze the rotations in your attached document. What's the actual password to open the door?
 """
-def solve_part1():
-    print("Day 1, Part 1:", rotate(read_input(INPUT_FILE)))
+@aoc_part(day=1, part=1)
+def solve_part1() -> int:
+    return rotate(read_input(INPUT_FILE))
 
 
 """
@@ -96,8 +98,9 @@ Be careful: if the dial were pointing at 50, a single rotation like R1000 would 
 
 Using password method 0x434C49434B, what is the password to open the door?
 """
-def solve_part2():
-    print("Day 1, Part 2:", rotate_with_count(read_input(INPUT_FILE)))
+@aoc_part(day=1, part=2)
+def solve_part2() -> int:
+    return rotate_with_count(read_input(INPUT_FILE))
 
 def rotate_with_count(input: str) -> int:
     position = 50

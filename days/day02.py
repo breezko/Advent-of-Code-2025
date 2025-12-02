@@ -1,4 +1,5 @@
 from pathlib import Path
+from utils.aoc import aoc_part
 from utils.io import read_input
 
 INPUT_FILE = Path(__file__).parents[1] / "inputs" / "raw" / "day02.txt"
@@ -42,10 +43,11 @@ Your job is to find all of the invalid IDs that appear in the given ranges. In t
 The rest of the ranges contain no invalid IDs.
 Adding up all the invalid IDs in this example produces 1227775554.
 """
+@aoc_part(day=2, part=1)
 def solve_part1():
     data = read_input(INPUT_FILE)
     id_ranges = tokenize_ranges(data)
-    print("Day 2, Part 1:",sum_repeated_ids(id_ranges))
+    return sum_repeated_ids(id_ranges)
 
 
 """
@@ -69,24 +71,24 @@ From the same example as before:
 2121212118-2121212124 now has one invalid ID, 2121212121.
 Adding up all the invalid IDs in this example produces 4174379265.
 """
-def solve_part2():
+@aoc_part(day=2, part=2)
+def solve_part2() -> int:
     data = read_input(INPUT_FILE)
     id_ranges = tokenize_ranges(data)
-    print("Day 2, Part 2:",sum_multiple_repeated_ids(id_ranges))
+    return sum_multiple_repeated_ids(id_ranges)
 
-def sum_multiple_repeated_ids(id_ranges: list[tuple]) -> int:
-    invalid_ids = []
+def sum_multiple_repeated_ids(id_ranges: list[tuple[int, int]]) -> int:
+    def is_repeated_pattern(n: int) -> bool:
+        s = str(n)
+        return len(s) > 1 and s in (s + s)[1:-1]
+    total = 0
     for start, end in id_ranges:
-        for id_num in range(int(start), int(end) + 1):
-            id_str = str(id_num)
-            length = len(id_str)
-            for sub_len in range(1, length // 2 + 1):
-                if length % sub_len == 0:
-                    times = length // sub_len
-                    if id_str[:sub_len] * times == id_str:
-                        invalid_ids.append(id_num)
-                        break
-    return sum(invalid_ids)
+        start_i = int(start)
+        end_i = int(end)
+        for n in range(start_i, end_i + 1):
+            if is_repeated_pattern(n):
+                total += n
+    return total
 
 
 def sum_repeated_ids(id_ranges: list[tuple]) -> int:
