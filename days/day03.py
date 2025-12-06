@@ -34,11 +34,13 @@ The total output joltage is the sum of the maximum joltage from each bank, so in
 
 There are many batteries in front of you. Find the maximum joltage possible from each bank; what is the total output joltage?
 """
+
+
 @aoc_part(day=3, part=1)
 def solve_part1():
     joltage = 0
     for line in read_input(INPUT_FILE).splitlines():
-        joltage += joltage_per_bank(line,K=2)
+        joltage += joltage_per_bank(line, K=2)
     return joltage
 
 
@@ -66,12 +68,15 @@ The total output joltage is now much larger: 987654321111 + 811111111119 + 43423
 
 What is the new total output joltage?
 """
+
+
 @aoc_part(day=3, part=2)
 def solve_part2():
     joltage = 0
     for line in read_input(INPUT_FILE).splitlines():
-        joltage += joltage_per_bank(line,K=12)
+        joltage += joltage_per_bank(line, K=12)
     return joltage
+
 
 def joltage_per_bank(line: str, K=2) -> int:
     digits = list(line.strip())
@@ -93,6 +98,7 @@ def joltage_per_bank(line: str, K=2) -> int:
 
     result_digits = stack[:K]
     return int("".join(result_digits))
+
 
 if __name__ == "__main__":
     solve_part1()

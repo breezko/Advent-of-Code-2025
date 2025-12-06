@@ -3,6 +3,7 @@ import importlib
 import os
 from pathlib import Path
 
+
 def load_days():
     days_dir = Path(__file__).resolve().parent.parent / "days"
     day_modules = {}

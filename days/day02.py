@@ -4,6 +4,7 @@ from utils.io import read_input
 
 INPUT_FILE = Path(__file__).parents[1] / "inputs" / "raw" / "day02.txt"
 
+
 def tokenize_ranges(line: str) -> list[str]:
     id_ranges = line.split(",")
     return [r.split("-") for r in id_ranges]
@@ -43,6 +44,8 @@ Your job is to find all of the invalid IDs that appear in the given ranges. In t
 The rest of the ranges contain no invalid IDs.
 Adding up all the invalid IDs in this example produces 1227775554.
 """
+
+
 @aoc_part(day=2, part=1)
 def solve_part1():
     data = read_input(INPUT_FILE)
@@ -71,16 +74,20 @@ From the same example as before:
 2121212118-2121212124 now has one invalid ID, 2121212121.
 Adding up all the invalid IDs in this example produces 4174379265.
 """
+
+
 @aoc_part(day=2, part=2)
 def solve_part2() -> int:
     data = read_input(INPUT_FILE)
     id_ranges = tokenize_ranges(data)
     return sum_multiple_repeated_ids(id_ranges)
 
+
 def sum_multiple_repeated_ids(id_ranges: list[tuple[int, int]]) -> int:
     def is_repeated_pattern(n: int) -> bool:
         s = str(n)
         return len(s) > 1 and s in (s + s)[1:-1]
+
     total = 0
     for start, end in id_ranges:
         start_i = int(start)
@@ -102,6 +109,7 @@ def sum_repeated_ids(id_ranges: list[tuple]) -> int:
                 if id_str[:half] == id_str[half:]:
                     invalid_ids.append(id_num)
     return sum(invalid_ids)
+
 
 if __name__ == "__main__":
     solve_part1()

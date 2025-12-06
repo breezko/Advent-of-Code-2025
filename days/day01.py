@@ -64,6 +64,8 @@ Because the dial points at 0 a total of three times during this process, the pas
 
 Analyze the rotations in your attached document. What's the actual password to open the door?
 """
+
+
 @aoc_part(day=1, part=1)
 def solve_part1() -> int:
     return rotate(read_input(INPUT_FILE))
@@ -98,9 +100,12 @@ Be careful: if the dial were pointing at 50, a single rotation like R1000 would 
 
 Using password method 0x434C49434B, what is the password to open the door?
 """
+
+
 @aoc_part(day=1, part=2)
 def solve_part2() -> int:
     return rotate_with_count(read_input(INPUT_FILE))
+
 
 def rotate_with_count(input: str) -> int:
     position = 50
@@ -124,7 +129,6 @@ def rotate_with_count(input: str) -> int:
     return zero_count
 
 
-
 def rotate(input: str) -> int:
     position = 50
     zero_count = 0
@@ -142,7 +146,6 @@ def rotate(input: str) -> int:
             zero_count += 1
 
     return zero_count
-
 
 
 if __name__ == "__main__":

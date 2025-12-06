@@ -22,35 +22,33 @@ The forklifts can only access a roll of paper if there are fewer than four rolls
 
 Consider your complete diagram of the paper roll locations. How many rolls of paper can be accessed by a forklift?
 """
+
+
 @aoc_part(day=4, part=1)
 def solve_part1():
     data = read_input(INPUT_FILE).splitlines()
     SYMBOLS = {"@": 1, ".": 0}
-    
+
     # Build numeric grid: '@' -> 1, '.' -> 0 (anything else -> 0)
-    grid = [
-        [SYMBOLS.get(ch, 0) for ch in line.strip()]
-        for line in data
-    ]
+    grid = [[SYMBOLS.get(ch, 0) for ch in line.strip()] for line in data]
 
     return count_neighbors(grid, False)
-
 
 
 def count_neighbors(grid: list, repeat: bool = False):
     rows = len(grid)
     cols = len(grid[0]) if rows > 0 else 0
     directions = [
-        (-1,  0),  # N
-        (-1,  1),  # NE
-        ( 0,  1),  # E
-        ( 1,  1),  # SE
-        ( 1,  0),  # S
-        ( 1, -1),  # SW
-        ( 0, -1),  # W
+        (-1, 0),  # N
+        (-1, 1),  # NE
+        (0, 1),  # E
+        (1, 1),  # SE
+        (1, 0),  # S
+        (1, -1),  # SW
+        (0, -1),  # W
         (-1, -1),  # NW
     ]
-    
+
     result = 0
     new_result = 0
     while True:
@@ -64,7 +62,7 @@ def count_neighbors(grid: list, repeat: bool = False):
                     nr, nc = r + dr, c + dc
                     if 0 <= nr < rows and 0 <= nc < cols:
                         adj_sum += grid[nr][nc]
-                
+
                 if adj_sum < 4:
                     grid[r][c] = 0
                     result += 1
@@ -83,16 +81,15 @@ Stop once no more rolls of paper are accessible by a forklift. In this example, 
 
 Start with your original diagram. How many rolls of paper in total can be removed by the Elves and their forklifts?
 """
+
+
 @aoc_part(day=4, part=2)
 def solve_part2():
     data = read_input(INPUT_FILE).splitlines()
     SYMBOLS = {"@": 1, ".": 0}
-    
+
     # Build numeric grid: '@' -> 1, '.' -> 0 (anything else -> 0)
-    grid = [
-        [SYMBOLS.get(ch, 0) for ch in line.strip()]
-        for line in data
-    ]
+    grid = [[SYMBOLS.get(ch, 0) for ch in line.strip()] for line in data]
 
     return count_neighbors(grid, True)
 

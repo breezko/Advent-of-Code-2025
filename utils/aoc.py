@@ -2,6 +2,7 @@ from dataclasses import dataclass, asdict
 from typing import Any, Callable
 import time
 
+
 @dataclass
 class AoCResult:
     day: int
@@ -18,6 +19,7 @@ class AoCResult:
     def to_dict(self) -> dict:
         return asdict(self)
 
+
 def aoc_part(day: int, part: int):
     def decorator(func: Callable[..., Any]):
         def wrapper(*args, **kwargs) -> AoCResult:
@@ -32,5 +34,7 @@ def aoc_part(day: int, part: int):
             )
             print(result)
             return result
+
         return wrapper
+
     return decorator
